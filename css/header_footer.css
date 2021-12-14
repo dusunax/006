@@ -1,0 +1,95 @@
+:root {
+    --color-theme: #007aff;
+    --boxshaow-header: 0 1px 0 #ccc;
+}
+header {
+    width: 100%;
+}
+.h_top {
+    box-shadow: var(--boxshaow-header);
+    background: #fff;
+}
+.h_top .contents_area {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav {
+    height: 100%;
+}
+nav ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+nav ul li {
+    padding: 10px 20px;
+    letter-spacing: -.02em;
+}
+nav ul li:hover {
+    border-radius: 40px;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+}
+.h_right {
+    height: 100%;
+}
+.icon {
+    display: block;
+    width: 16px;
+    height: 22px;
+    margin: 0 2px;
+    float: right;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.icon_location {
+    background-image: url(../img/icon/icon-location.svg);
+}
+li:hover .icon_location {
+    background-image: url(../img/icon/icon-location_white.svg);
+}
+.icon_outlink {
+    background-image: url(../img/icon/icon-outlink.svg);
+}
+li:hover .icon_outlink {
+    background-image: url(../img/icon/icon-outlink_white.svg);
+}
+.icon_zoom {
+    background-image: url(../img/icon/icon-zoom.svg);
+}
+.icon_cart {
+    background-image: url(../img/icon/icon-cart.svg);
+}
+.icon_people {
+    background-image: url(../img/icon/icon-people.svg);
+}
+.icon_nav {
+    background-image: url(../img/icon/icon-nav.svg);
+}
+.h_right {
+    display: flex;
+    align-items: center;
+}
+.h_right a {
+    height: auto;
+}
+.h_right span {
+    padding: 0px 12px;
+}
+.h_bot {
+    box-shadow: var(--boxshaow-header);
+    background: #fff;
+}
+.h_bot .contents_area {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.h_bot .head {
+    font-size: 18px;
+}
