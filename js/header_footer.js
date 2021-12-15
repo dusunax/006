@@ -1,8 +1,8 @@
+let s_top=document.querySelector('html').scrollTop;
 document.addEventListener("DOMContentLoaded", function(){
     let btn_nav=document.querySelector(".icon_nav")
     let header=document.querySelector("header")
     let nav=document.querySelector("nav")
-    let s_top=document.querySelector('html').scrollTop;
     let h_bot_oTop=document.querySelector('.h_bot').offsetTop;
 
     btn_nav.addEventListener("click", function(){
