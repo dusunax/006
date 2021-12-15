@@ -22,6 +22,8 @@ body {
     margin: 0;
     font-family: 'Samsung Sharp Sans Regular', sans-serif;
     color: #222;
+
+    height: 3000px;
 }
 ul, li {
     margin: 0;
@@ -46,3 +48,17 @@ a {
     box-sizing: border-box;
     margin: 0 auto;
 }
+.wrap .hide_lg {
+    display: block;
+}
+.wrap .show_lg {
+    display: none;
+}
+/* @media screen and (max-width: 1200px) {
+    .wrap .hide_lg {
+        display: none;
+    }
+    .wrap .show_lg {
+        display: block;
+    }
+} */
