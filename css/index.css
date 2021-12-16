@@ -16,7 +16,7 @@
     transform: translateX(-50%) translateY(-50%);
     z-index: 99;
     opacity: 1;
-    transition: opacity 1s;
+    transition: opacity .5s;
 }
 .sec1_video_bg {
     width: 100%;
@@ -97,14 +97,6 @@
     .grad {
         background: #edeae5;
     }
-    .sec1 {
-        opacity: 1;
-    }
-    .sec1_video,
-    .sec1_video_bg,
-    .grad {
-        display: none;
-    }
 }
 @media screen and (max-width: 1100px) {
     .sec1 {
@@ -112,6 +104,14 @@
     }
     .text_box {
         margin-left: 50%;
+    }
+    .sec1 {
+        opacity: 1;
+    }
+    .sec1_video,
+    .sec1_video_bg,
+    .grad {
+        display: none;
     }
 }
 @media screen and (max-width: 960px) {
