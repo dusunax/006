@@ -68,7 +68,7 @@ a {
 .wrap .show_lg {
     display: none;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .contents_area {
         padding-left: 15px;
         padding-right: 15px;

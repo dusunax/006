@@ -1,7 +1,7 @@
 header {
     width: 100%;
     position: relative;
-    z-index: 9;
+    z-index: 99;
 }
 .h_top {
     box-shadow: var(--boxshadow-header);
@@ -96,6 +96,9 @@ header.float .h_bot {
     position: fixed;
     top: 0;
 }
+header.float .contents_area {
+    padding: 12px;
+}
 header.float .h_top {
     padding-bottom: 50px;
 }
@@ -125,7 +128,7 @@ header.float .h_top {
     }
     nav {
         position: fixed;
-        right: -100%;
+        right: -110%;
         top: 0;
         z-index: 99;
         padding-top: 60px;
