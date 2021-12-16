@@ -53,20 +53,24 @@
 
     font-family: var(--font-bold);
 }
-.sec1 .text_box > * {
+/* 텍스트박스 */
+.text_box > * {
     margin-left: 10px;
     word-break: keep-all;
 }
-.sec1 .text_box .title {
+.text_box .title,
+h1.title {
     font-size: 80px;
     font-size: 5em;
     margin-left: 0;
+    word-break: keep-all;
 }
-.sec1 .text_box h2 {
+.text_box h2 {
     font-size: 50px;
     font-size: 3.5em;
 }
-.sec1 .text_box h3 {
+.text_box h3,
+h3.detail {
     margin-left: 12px;
     font-size: 40px;
     font-size: 3em;
@@ -116,6 +120,45 @@
     flex: 1 1 auto;
     margin-left: 40px;
     font-size: 20px;
+}
+/* 섹션3 */
+.sec3 {
+    margin-top: 50px;
+    border: 1px solid skyblue;
+    background: #eee;
+    padding-bottom: 1000px;
+}
+.sec3 .text_box {
+    padding-top: 50px;
+}
+.sec3 .title {
+    width: 50px;
+    word-break: break-all;
+    margin-top: 50px;
+}
+.sec3 h2 {
+    width: 50px;
+    word-break: break-all;
+    margin-left: 100%;
+    margin-top: 200px;
+}
+.sec3 .canvas_box {
+    width: 80%;
+    font-size: 0;
+
+    position: absolute;
+    top: 50px;
+    left: 15%;
+}
+.sec3 canvas{
+    display: block;
+    width: 100%;
+    height: calc(100vh - 100px);
+}
+.sec3 canvas{
+    background: url(../img/360/BSM-F711_360_4S/00000050.jpg) no-repeat center / contain;
+
+    border: 1px solid skyblue
 }
 @media screen and (max-width: 1800px) {
     .sec1 .text_box {

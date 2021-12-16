@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function(){
         nav.classList.toggle('active')
     })
     document.addEventListener("scroll", function(){
-        s_top=document.querySelector('html').scrollTop;
         if(s_top >= h_bot_oTop){
             header.classList.add('float')
         }
