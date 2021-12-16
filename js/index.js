@@ -5,16 +5,14 @@ document.addEventListener("DOMContentLoaded", function(){
     function sec1_video_start(){
         setTimeout(function(){
             document.querySelector(".sec1 .grad").style.opacity="0";
+            //
         }, 2550)
         sec1_video.addEventListener('loadedmetadata', function(){
-            let sec1_duration=(sec1_video.duration * 1000).toFixed() + 200
+            let sec1_duration=(sec1_video.duration * 1000).toFixed()
             setTimeout(function(){
                 sec1_video.style.opacity="0";
-                sec1_video.style.    transition="opacity 1s";
-            }, sec1_duration)
+                document.querySelector(".sec1_video_bg").style.opacity="0";
+            }, Number(sec1_duration)+500)
         });
     }
-    document.addEventListener("scroll", function(){
-        // s_top <= header에 있음
-    })
 });
