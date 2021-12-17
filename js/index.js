@@ -88,7 +88,9 @@ document.addEventListener("DOMContentLoaded", function(){
     // 섹션4
     const sec4=document.querySelector(".sec4")
     let sec4_o_top=document.querySelector(".sec4").offsetTop;
+    let sec4_bot;
     let sec4_c_name=document.querySelectorAll(".sec4 .color_name")
+    let sec4_c_box=document.querySelectorAll(".sec4 .color_box")
     let sec4_img=document.querySelectorAll(".sec4 img")
     // init
     sec4_c_name[0].style.opacity="1"
@@ -96,30 +98,8 @@ document.addEventListener("DOMContentLoaded", function(){
     let sec4_stone=[]
     let color_placed=null;
     for(let i=0; i<sec4_c_name.length; i++){
-        sec4_stone.push(win_h * i)
+        sec4_stone.push((win_h) * i)
     }
-    console.log(sec4_stone);
-    // 
-    let sec4_c_box=document.querySelectorAll(".sec4 .color_box");
-    let sec4_bg=document.querySelectorAll(".sec4 .img_bg");
-    // 
-    let sec4_o_top_parts=[];
-    for(let i=0; i<sec4_img.length; i++){
-        // sec4_o_top_parts.push(sec4_o_top + ((sec4.clientHeight/sec4_img.length) * i))
-    }
-    // console.log(sec4_o_top_parts)
-
-    // img_bg_fill(0);
-    // console.log(sec4_o_top_parts)
-    // function img_bg_fill(part){
-    //     if(part=="no"){
-    //         document.querySelector(".sec4 .img_bg").style.height="0%"
-    //     }
-    //     else {
-    //         sec4_bg[part].style.height="100%"
-    //     }
-    // }
-    
     // 이벤트: 스크롤
     document.addEventListener('scroll', function(){
         win_h=window.innerHeight
@@ -140,9 +120,11 @@ document.addEventListener("DOMContentLoaded", function(){
         // 섹션3
         if(s_top + 50 < sec3_o_top){
             sec3_canvas.parentElement.style.top="50px"
+            sec4_c_box[0].classList.remove("on")
         }
         else if(s_bot > sec3_o_top + sec3.clientHeight+500){
             sec3_canvas.parentElement.style.opacity="0"
+            sec4_c_box[0].classList.add("on")
         }
         else if(s_bot >= sec3_o_top && s_bot <= sec3_o_top + sec3.clientHeight+200){
             sec3_scroll=s_top - sec3_o_top
@@ -153,26 +135,39 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         loop();
         // 섹션4
-        console.log(s_bot, sec4_o_top + (win_h * sec4_c_name.length));
-        if(s_top >= sec4_o_top && s_bot < sec4_o_top + (win_h * sec4_c_name.length)){
+        sec4_bot=sec4_o_top + (win_h * sec4_c_name.length) + 300
+        if(s_top >= sec4_o_top && s_bot < sec4_bot){
             sec4.classList.add("on")
             sec4.classList.remove("bot")
-            let sec4_ratio=100;  // (될 거: 100분율 / 할 거: 파트(100vh))
-            let sec4_progress = s_top - sec4_o_top; // 진행 * 될거/할거 비율
-            // console.log(sec4_ratio, sec4_progress)
+            //컬러박스 체크
             for(let i=sec4_stone.length; i>=0; i--){
-                if(s_top - sec4_o_top > sec4_stone[i]){
-                    color_placed=i
+                if(s_top - sec4_o_top > sec4_stone[i] - 150){
+                    if(color_placed!==i){
+                        color_placed=i;
+                        for(let j=0; j<sec4_stone.length; j++){
+                            if(i!==j){
+                                sec4_c_box[j].children[2].style.top="-500%" // .color_name
+                                setTimeout(() => {
+                                    sec4_c_box[j].classList.remove("on")
+                                }, 500);
+                            }
+                        }
+                        sec4_c_box[i].classList.add("on")
+                        sec4_c_box[i].children[2].style.top="190px"
+                        // 컬러박스 바꿈
+                        console.log(sec4_c_box[i].children[2])
+                        break;
+                    }
                     break;
                 }
             }
-            // console.log(s_top - sec4_o_top, color_placed)
         }
         else {
             sec4.classList.remove("on")
             color_placed=null
             if(s_bot >= sec4_o_top + (win_h * sec4_c_name.length)){
                 sec4.classList.add("bot")
+                color_placed=sec4_c_name.length-1
             }
             else {
                 sec4.classList.remove("bot")

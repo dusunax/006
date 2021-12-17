@@ -235,7 +235,6 @@ h1.title {
 /* 섹션4 */
 .sec4 {
     width: 100%;
-    /* height: 100vh; */
     position: relative;
 }
 .sec4 > div,
@@ -244,9 +243,6 @@ h1.title {
     height: 100vh;
     position: relative;
     top: 0;
-}
-.color_box {
-    /* opacity: 0; */
 }
 /* .sec4 .color_box {
     position: fixed;
@@ -265,16 +261,30 @@ h1.title {
     transform: translateX(-50%);
     z-index: 9;
 }
+.sec4 .title {
+    top: 100px;
+    opacity: .5;
+}
+.sec4 .text {
+    bottom: 50px;
+}
 .sec4 .color_name {
     font-size: 6em;
     top: 190px;
     opacity: 0;
+    color: #fff;
 }
-.sec4 .title {
-    top: 100px;
+.cream .color_name {
+    color: #4d4d4d;
+    z-index: 0;
 }
-.sec4 .text {
-    bottom: 50px;
+.color_box.on .color_name {
+    animation: upup .5s;
+    opacity: 1;
+}
+@keyframes upup {
+    0% { top: 100% ; opacity: 0;}
+    100% { top: 190px; opacity: 1;}
 }
 .sec4 img {
     width: 50%;
@@ -285,9 +295,13 @@ h1.title {
     left: 50%;
     transform: translateX(-44%) translateY(-50%);
     z-index: 999;
-    /* opacity: 0; */
-    
-    transition: all .2s;
+
+    opacity: 0;
+    transition: all .3s;
+}
+.sec4 .color_box.on .color_name,
+.sec4 .color_box.on img {
+    opacity: 1;
 }
 .sec4 .shade {
     width: 100%;
@@ -309,20 +323,16 @@ h1.title {
     position: fixed;
 }
 .cream .img_bg {
-    background: #f2edcc;
     background: linear-gradient(to bottom left, #f2edcc, #fbefa1)
 }
 .green .img_bg {
-    background: #52bb58;
     background: linear-gradient(to bottom left, #28bd23, #4aaa2d)
 }
 .lavender .img_bg {
-    background: #d85ed8;
     background: linear-gradient(to bottom left, #b23bb6, #b13e8a)
 }
 .black .img_bg {
-    background: #252525;
-    background: linear-gradient(to bottom left, #858585, #3f3e38)
+    background: linear-gradient(to bottom left, #858585, #3f3e38);
 }
 /* 반응형시작 */
 @media screen and (max-width: 1800px) {
