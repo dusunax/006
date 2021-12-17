@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
         let interval=setInterval(() => {
             fr_row[row].style.width = sec2_w_x[row]+"%"
             sec2_w_x[row]+=1;
-            if(sec2_w_x[row] >= 100){
+            if(sec2_w_x[row] > 100){
                 clearInterval(interval)
                 interv_chk=false;
             }
@@ -75,6 +75,16 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     set_img();
     loop();
+    // 네비 섹션이동
+    let nav_li=document.querySelectorAll(".nav_section ul li");
+    for(let i=0; i<nav_li.length; i++){
+        nav_li[i].addEventListener('mouseenter', function(){
+            nav_li[i].children[0].classList.toggle('active')
+        })
+        nav_li[i].addEventListener('mouseleave', function(){
+            nav_li[i].children[0].classList.toggle('active')
+        })
+    }
     // 이벤트: 스크롤
     document.addEventListener('scroll', function(){
         win_h=window.innerHeight
