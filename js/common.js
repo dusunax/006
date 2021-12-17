@@ -13,3 +13,8 @@ document.addEventListener('scroll', function(){
     s_top=s_top=document.querySelector('html').scrollTop;
     s_bot=s_top+win_h;
 });
+// 함수
+// 애니메이션(스크롤)
+function scroll_in(el, timer, direction){
+
+}

@@ -24,6 +24,7 @@ nav ul {
 }
 nav ul li {
     padding: 10px 20px;
+    border-radius: 25px;
     letter-spacing: -.02em;
 }
 nav ul li:hover {
