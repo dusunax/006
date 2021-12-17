@@ -122,11 +122,11 @@ document.addEventListener("DOMContentLoaded", function(){
             sec3_canvas.parentElement.style.top="50px"
             sec4_c_box[0].classList.remove("on")
         }
-        else if(s_bot > sec3_o_top + sec3.clientHeight+500){
+        else if(s_bot > sec3_o_top + sec3.clientHeight + (win_h/2)){
             sec3_canvas.parentElement.style.opacity="0"
             sec4_c_box[0].classList.add("on")
         }
-        else if(s_bot >= sec3_o_top && s_bot <= sec3_o_top + sec3.clientHeight+200){
+        else if(s_bot >= sec3_o_top && s_bot <= sec3_o_top + sec3.clientHeight+(win_h/4)){
             sec3_scroll=s_top - sec3_o_top
             if(s_top + 50 >= sec3_o_top){
                 sec3_canvas.parentElement.style.top=(sec3_scroll + 100)+"px"

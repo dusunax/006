@@ -370,6 +370,15 @@ h1.title {
         padding-right: 0px;
         box-shadow: var(--boxshadow-topborder);
     }
+    .sec4 img {
+        width: 55%;
+    }
+    .sec4 h3.title {
+        font-size: 2em;
+    }
+    .sec4 .color_name {
+        font-size: 7em;
+    }
 }
 @media screen and (max-width: 1100px) {
     .text_box {
