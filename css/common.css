@@ -19,22 +19,25 @@
     src: local('SamsungOneKorean'), url('../font/SamsungOne-400.ttf');
 }
 :root {
+    --font-bold: 'Samsung Sharp Sans Bold', arial, sans-serif;
     --color-theme: #007aff;
     --boxshadow-header: 0 1px 0 0 #ccc;
     --boxshadow-topborder: 0 -1px 0 0 #ccc;
     --boxshadow-default: 5px 5px 10px 5px rgba(0, 0, 0, .2);
-    --font-bold: 'Samsung Sharp Sans Bold', arial, sans-serif;
+
+    --tmp-border: 1px solid skyblue;
+    --tmp-bg: pink;
 }
 body {
     margin: 0;
     font-family: 'Samsung Sharp Sans Regular', sans-serif;
     color: #222;
 
-    height: 3000px;
+    height: 10000px;
 }
 h1, h2, h3, h4, h5, h6 {
-    margin-top: .1em;
-    margin-bottom: .1em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 ul, li {
     margin: 0;
@@ -70,7 +73,18 @@ a {
 }
 @media screen and (max-width: 1000px) {
     .contents_area {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .contents_area {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .wrap .icon {
+        width: 10px;
+        height: 20px;
+        padding: 0 9px;
     }
 }
