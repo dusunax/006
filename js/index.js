@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function(){
             if(!sec4_chk_in){
                 sec4_chk_in=true;
                 console.log(win_size)
-                if(win_size<=768){
+                if(win_size<=420){
                     sec5_el_move.style.transform="translateY(0)"
                     sec5_el_move.style.opacity="1"
                 }
