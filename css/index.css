@@ -347,8 +347,6 @@ h1.title {
 .sec5 {
     padding-top: 300px;
     padding-bottom: 300px;
-
-    background: pink;
 }
 .sec5 .contents_area {
     padding: 0;
@@ -376,25 +374,39 @@ h1.title {
     transform: translateX(-50%) translateY(-50%);
 }
 .sec5 .right {
-    padding: 0 10%;
+    padding-left: 50px;
+    padding-right: 20%;
     display: flex;
     flex-direction: column;
 }
 .sec5 .text_box {
+    padding-top: 10px;
     flex: 1 1 auto;
     background: #fff;
     position: relative;
     text-align: right;
+    z-index: 999;
+}
+.sec5 .title {
+    transition: opacity 1s;
+    opacity: .2;
 }
 .sec5 .right img {
     transform: translateY(100%);
-    opacity: 0;
     transition: opacity .4s;
+    opacity: 0;
+}
+.sec5.on .title,
+.sec5.on .right img {
+    opacity: 1;
 }
 /* 반응형시작 */
 @media screen and (max-width: 1800px) {
     .text_box {
         font-size: 1.3em;
+    }
+    .sec5 .right {
+        padding-right: 15%;
     }
 }
 @media screen and (max-width: 1600px) {
@@ -435,6 +447,10 @@ h1.title {
     }
     .sec4 .color_name {
         font-size: 7em;
+    }
+    .sec5 .right {
+        padding-left: 30px;
+        padding-right: 10%;
     }
 }
 @media screen and (max-width: 1100px) {
@@ -487,10 +503,49 @@ h1.title {
     .nav_section ul {
         transform: scale(1.1);
     }
+    .sec5 .contents_area > * {
+        height: auto;
+    }
+    .sec5 .right {
+        padding-left: 30px;
+        padding-right: 20px;
+    }
 }
 @media screen and (max-width: 800px) {
     .sec2 .title {
         font-size: 75px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .sec5 {
+        padding-top: 200px;
+    }
+    .sec5 .contents_area {
+        display: block;
+    }
+    .sec5 .left {
+        height: 70vh;
+    }
+    .sec5 .right {
+        padding: 0 20px;
+    }
+    .sec5 .text_box {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        text-align: center;
+    }
+    .sec5 .img_box {
+        height: auto;
+        text-align: center;
+        overflow: hidden;
+        order: 2;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+    .sec5 img {
+        align-self: flex-end;
+        width: 100%;
     }
 }
 @media screen and (max-width: 700px) {

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let sec_o_top=sections_init("o_top");
     let sec_o_bot=sections_init("o_bot");
     let s_limit_boundery=100
-    let sections_limit=sections_init("s_limit");
+    let sections_limit=sections_init("s_limit"); // 보류
     function sections_init(getThis){
         let result=[];
         for(let i=0; i<sec.length; i++){
@@ -31,21 +31,19 @@ document.addEventListener("DOMContentLoaded", function(){
                 sec_on_chk=false;
             }, 500);
             console.log("on")
-            for(let i=0; i<sec.length; i++){                                // sec갯수만큼 돌림
-            
+            for(let i=0; i<sec.length; i++){
                 if(i!==3){
                     if(s_top >= sec_o_top[i] - (win_h/4) && s_bot <= sec_o_bot[i] + (win_h/4)){
-                                                                            // sec[i]에 s_top이 해당됨
-                        if(!sec[i].classList.contains("on")){               // sec[i]에 on이 없음
+                        if(!sec[i].classList.contains("on")){
                             setTimeout(() => {
-                                sec[i].classList.add("on")                  // sec[i]에 on을 추가
+                                sec[i].classList.add("on")
                             }, 100);
                         }
                     }
-                    else {                                                  // sec[i]에 해당되지 않음
-                        if(sec[i].classList.contains("on")){                // sec[i]에 on이 있음   
+                    else {
+                        if(sec[i].classList.contains("on")){  
                             setTimeout(() => {
-                                sec[i].classList.remove("on")               // sec[i]에 on을 지움
+                                sec[i].classList.remove("on")
                             }, 100);
                         }
                     }
@@ -224,17 +222,25 @@ document.addEventListener("DOMContentLoaded", function(){
                 sec[3].classList.remove("bot")
             }
         }
-        // 섹션4
+        // 섹션5, sec[4]
         if(sec[4].classList.contains("on")){
             if(!sec4_chk_in){
-                pos_y(sec5_el_move, "up", 1)
                 sec4_chk_in=true;
+                console.log(win_size)
+                if(win_size<=768){
+                    sec5_el_move.style.transform="translateY(0)"
+                    sec5_el_move.style.opacity="1"
+                }
+                else if(win_size<=768){
+                    pos_y(sec5_el_move, "down", 2)
+                }
+                else {
+                    pos_y(sec5_el_move, "up", 1)
+                }
             }
         }
         else {
             sec4_chk_in=false;
-            sec5_el_move.style.opacity="0"
-            sec5_el_move.style.transform="translateY(100%)"
         }
     })
 });
