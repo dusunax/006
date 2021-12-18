@@ -322,6 +322,9 @@ h1.title {
 .sec4.on .text_box {
     position: fixed;
 }
+.sec4.con .img_bg {
+    z-index: 9;
+}
 .cream .img_bg {
     background: linear-gradient(to bottom left, #f2edcc, #fbefa1)
 }

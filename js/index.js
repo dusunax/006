@@ -135,13 +135,13 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         loop();
         // 섹션4
-        sec4_bot=sec4_o_top + (win_h * sec4_c_name.length) + 300
+        sec4_bot=sec4_o_top + (win_h * sec4_c_name.length) + 400
         if(s_top >= sec4_o_top && s_bot < sec4_bot){
             sec4.classList.add("on")
             sec4.classList.remove("bot")
             //컬러박스 체크
             for(let i=sec4_stone.length; i>=0; i--){
-                if(s_top - sec4_o_top > sec4_stone[i] - 150){
+                if(s_top - sec4_o_top > sec4_stone[i] - 200){
                     if(color_placed!==i){
                         color_placed=i;
                         for(let j=0; j<sec4_stone.length; j++){
@@ -168,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function(){
             if(s_bot >= sec4_o_top + (win_h * sec4_c_name.length)){
                 sec4.classList.add("bot")
                 color_placed=sec4_c_name.length-1
+                sec4_c_box[color_placed].classList.add("on")
             }
             else {
                 sec4.classList.remove("bot")
