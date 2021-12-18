@@ -244,13 +244,10 @@ h1.title {
     position: relative;
     top: 0;
 }
-/* .sec4 .color_box {
-    position: fixed;
-} */
 .sec4 .text_box {
     text-align: center;
-    /* position: fixed; */
     position: absolute;
+    height: 100%;
 }
 .sec4 .text_box > *,
 .sec4 .color_name {
@@ -267,6 +264,11 @@ h1.title {
 }
 .sec4 .text {
     bottom: 50px;
+    transition: all .3s;
+}
+.sec4.bot .text {
+    position: absolute;
+    bottom: 160px;
 }
 .sec4 .color_name {
     font-size: 6em;
@@ -299,6 +301,9 @@ h1.title {
     opacity: 0;
     transition: all .3s;
 }
+.sec4.bot img {
+    top: 50%;
+}
 .sec4 .color_box.on .color_name,
 .sec4 .color_box.on img {
     opacity: 1;
@@ -311,10 +316,11 @@ h1.title {
     bottom: 0;
     background: #fff;
 }
-.sec4.bot .shade,
-.sec4.bot .text_box {
+.sec4.bot .img_bg,
+.sec4.bot .shade {
     top: auto;
-    bottom: 0;
+    bottom: 100px;
+    transition: all .4s;
 }
 .sec4.on .shade,
 .sec4.on img,
@@ -336,6 +342,54 @@ h1.title {
 }
 .black .img_bg {
     background: linear-gradient(to bottom left, #858585, #3f3e38);
+}
+/* 섹션5 */
+.sec5 {
+    padding-top: 300px;
+    padding-bottom: 300px;
+
+    background: pink;
+}
+.sec5 .contents_area {
+    padding: 0;
+    max-width: none;
+    display: flex;
+}
+.sec5 .contents_area > * {
+    flex: 1 1 auto;
+    height: calc(100vh - 150px);
+}
+.sec5 img {
+    width: 100%;
+}
+.sec5 .left {
+    flex: 0 0 60%;
+    overflow: hidden;
+    position: relative;
+}
+.sec5 .left img {
+    width: auto;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+.sec5 .right {
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+}
+.sec5 .text_box {
+    flex: 1 1 auto;
+    background: #fff;
+    position: relative;
+    text-align: right;
+}
+.sec5 .right img {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: opacity .4s;
 }
 /* 반응형시작 */
 @media screen and (max-width: 1800px) {
