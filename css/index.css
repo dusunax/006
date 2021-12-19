@@ -384,12 +384,16 @@ h1.title {
     flex: 1 1 auto;
     background: #fff;
     position: relative;
-    text-align: right;
     z-index: 999;
 }
 .sec5 .title {
     transition: opacity 1s;
     opacity: .2;
+    text-align: right;
+    padding: 20px 0;
+}
+.sec5 .text {
+    text-align: right;
 }
 .sec5 .right img {
     transform: translateY(100%);

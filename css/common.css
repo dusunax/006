@@ -71,6 +71,9 @@ a {
 .wrap .show_lg {
     display: none;
 }
+.title_hidden {
+    display: none;
+}
 @media screen and (max-width: 1000px) {
     .contents_area {
         padding-left: 20px;

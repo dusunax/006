@@ -227,11 +227,11 @@ document.addEventListener("DOMContentLoaded", function(){
             if(!sec4_chk_in){
                 sec4_chk_in=true;
                 console.log(win_size)
-                if(win_size<=420){
+                if(win_size<=768){
                     sec5_el_move.style.transform="translateY(0)"
                     sec5_el_move.style.opacity="1"
                 }
-                else if(win_size<=768){
+                else if(win_size<=960){
                     pos_y(sec5_el_move, "down", 2)
                 }
                 else {
