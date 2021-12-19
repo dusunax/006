@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }, 500);
             for(let i=0; i<sec.length; i++){
                 if(i!==3){
-                    if(s_top >= sec_o_top[i] - (win_h/4) && s_bot <= sec_o_bot[i] + (win_h/4)){
+                    if(s_top >= sec_o_top[i] - (win_h/5) && s_bot <= sec_o_bot[i] + (win_h/5)){
                         if(!sec[i].classList.contains("on")){
                             setTimeout(() => {
                                 sec[i].classList.add("on")
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
     function loop() {
-        progress = (s_top - sec_o_top[2]) / (sec[2].clientHeight - win_h + 400);
+        progress = (s_top - sec_o_top[2]) / (sec[2].clientHeight - win_h + 500);
         // console.log("s_top: "+s_top, "\no_top: "+Number(sec_o_top[2]), "\n0부터 785: "+(s_top - sec_o_top[2] + 50),"\n진행:"+ progress)
         if(progress < 0) progress = 0;
         else if(progress > 1) progress = 1;
@@ -152,25 +152,14 @@ document.addEventListener("DOMContentLoaded", function(){
     let sec5_el_move=document.querySelector(".sec5 .right img")
     // 섹션6, sec[5]
     let sec6_el=document.querySelector(".sec6 .bg")
-
+    // 섹션8, sec[7]
+    let sec8_el=document.querySelector(".sec8 .img_box .flip")
+    let sec8_el_2=document.querySelector(".sec8 .img_box .water")
     // 이벤트: 스크롤
     document.addEventListener('scroll', function(){
         win_h=window.innerHeight
         section_on();
         // 공통
-        // check_in
-        for(let i=0; i<sec.length; i++){
-            if(sec[i].classList.contains("on")){
-                if(!sec_chk_in[i]){
-                    sec_chk_in[i]=true;
-                }
-            }
-            else {
-                if(sec_chk_in[i]){
-                    sec_chk_in[i]=false;
-                }
-            }
-        }
         // 섹션2
         for(let i=0; i<fr_row.length; i++){
             if(s_top > sec2_text_oTop[i] - (win_h / 2) && s_top < sec2_text_oTop[i] - (win_h / 2) + 500){
@@ -190,14 +179,14 @@ document.addEventListener("DOMContentLoaded", function(){
             sec3_canvas.parentElement.style.top="50px"
             sec4_c_box[0].classList.remove("on")
         }
-        else if(s_bot > sec_o_top[2] + sec[2].clientHeight + (win_h/2)){
+        else if(s_bot > sec_o_top[2] + sec[2].clientHeight + 200){
             sec3_canvas.parentElement.style.opacity="0"
             sec4_c_box[0].classList.add("on")
         }
-        else if(s_bot >= sec_o_top[2] && s_bot <= sec_o_bot[2]+(win_h/4)){
+        else if(s_bot >= sec_o_top[2] && s_bot <= sec_o_bot[2] + 500){
             sec3_scroll=s_top - sec_o_top[2]
             if(s_top + 50 >= sec_o_top[2]){
-                sec3_canvas.parentElement.style.top=(sec3_scroll + 100)+"px"
+                sec3_canvas.parentElement.style.top=(sec3_scroll + 50)+"px"
             }
             sec3_canvas.parentElement.style.opacity="1"
         }
@@ -263,12 +252,13 @@ document.addEventListener("DOMContentLoaded", function(){
                 sec5_chk_in=false;
             }
         }
-        // 섹션6, sec[5]
+        // 섹션6, sec[5] // 함수정리...?
         if(sec[5].classList.contains("on")){
-            if(sec_chk_in[5]){
+            if(!sec_chk_in[5]){
                 document.querySelector(".noclock").style.opacity="0"
+                sec_chk_in[5]=true;
             }
-            if(s_top > sec_o_top[5] + 100){
+            if(s_top > sec_o_top[5] - 100){
                 setTimeout(() => {
                     sec[5].classList.add("active")
                 }, 100);
@@ -278,11 +268,11 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         else {
-            if(!sec_chk_in[5]){
+            if(sec_chk_in[5]){
                 setTimeout(() => {
                     sec[5].classList.remove("active")
-                    document.querySelector(".sec6 .txt").classList.remove("active")
                 }, 200);
+                document.querySelector(".sec6 .txt").classList.remove("active")
                 if(s_bot > sec_o_bot[5] - (win_h/5)){
                     sec[5].classList.add("bot")
                     document.querySelector(".noclock").style.opacity="1"
@@ -290,11 +280,60 @@ document.addEventListener("DOMContentLoaded", function(){
                 else{
                     sec[5].classList.remove("bot")
                 }
+                sec_chk_in[5]=false;
             }
             if(s_top < sec_o_top[5]){
                 document.querySelector(".sec6 .txt").classList.remove("active")
             }
         }
-        // sec6_el.style.width="50%"
+        // 섹션7, sec[6]
+        if(sec[6].classList.contains("on")){
+            if(!sec_chk_in[6]){
+                sec_chk_in[6]=true;
+                pos_y(document.querySelector(".sec7 .bg"), "up", .5)
+                sec[6].classList.add("active")
+            }
+        }
+        else {
+            sec[6].classList.remove("active")
+            sec_chk_in[6]=false;
+        }
+        // 섹션8, sec[7]
+        let sec8_point=(s_top - sec_o_top[7] - 0).toFixed()
+        if(sec[7].classList.contains("on")){
+            if(!sec_chk_in[7]){
+                sec_chk_in[7]=true;
+            }
+        }
+        else {
+            sec_chk_in[7]=false;
+        }
+        if(sec8_point > 0 && sec8_point < 500){
+            console.log(sec8_point)
+            sec8_el.style.transform="translateX(calc(-50%)) rotate("+(-25 - (sec8_point / 100))+"deg)"
+            sec8_el_2.style.transform="translateY(-"+sec8_point/2+"px)"
+        }
+        // 섹션9, sec[8]
+        if(sec[8].classList.contains("on")){
+            if(!sec_chk_in[8]){
+                sec_chk_in[8]=true;
+            }
+            else {
+                sec_chk_in[8]=false;
+            }
+        }
+        // 섹션10, sec[9]
+        if(sec[9].classList.contains("on")){
+            if(!sec_chk_in[9]){
+                sec_chk_in[9]=true;
+            }
+            else {
+                sec_chk_in[9]=false;
+            }
+        }
+
+
+        
     })
+    // 스크롤이벤트 끝
 });

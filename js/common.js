@@ -24,9 +24,9 @@ function pos_y(el, updown, speed){
         let tmp_pos_y=100 * updown; // 100, -100
         pos_y_chk=true;
         let pos_y_interval=setInterval(() => {
-            el.style.transform = "translateY("+tmp_pos_y+"%)"
             tmp_pos_y+=(-1 * updown); // --, ++
-            if(Math.abs(tmp_pos_y) <= 0){
+            el.style.transform = "translateY("+tmp_pos_y+"%)"
+            if(Math.abs(tmp_pos_y) == 0){
                 clearInterval(pos_y_interval)
                 pos_y_chk=false;
             }
