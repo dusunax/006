@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     // 섹션전체!
-    let sec=document.querySelectorAll(".sec")
+    const sec=document.querySelectorAll(".sec")
     let sec_o_top=sections_init("o_top");
     let sec_o_bot=sections_init("o_bot");
     let s_limit_boundery=100
@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const context = sec3_canvas.getContext('2d');
     const sec3_imgs = [];
     // 00000 000 console.log(canvas.getContext)
+    let canvas_o_height=sec3_canvas.clientHeight
     if(!sec3_canvas.getContext){
         console.log("캔버스 기능을 제공하지 않는 브라우저입니다.")
     }
@@ -148,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function(){
     for(let i=0; i<sec4_c_name.length; i++){
         sec4_stone.push((win_h) * i)
     }
+    let sec4_title_top;
     // 섹션5, sec[4], 함수 만들기
     let sec5_chk_in=false;
     let sec5_el_move=document.querySelector(".sec5 .right img")
@@ -176,26 +178,35 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         // 섹션3
+        loop();
         if(s_top + 50 < sec_o_top[2]){
             sec3_canvas.parentElement.style.top="50px"
             sec4_c_box[0].classList.remove("on")
         }
         else if(s_bot > sec_o_bot[2] + 200){
-            sec3_canvas.parentElement.style.opacity="0"
-            sec4_c_box[0].classList.add("on")
+            sec4_c_box[0].classList.add("on") // 4
         }
-        else if(s_bot >= sec_o_top[2] && s_bot <= sec_o_bot[2] + 500){
+        // (섹션3:영역)------------------------------------------------여기 고치던 중
+        sec4_top_point=canvas_o_height + 50
+        console.log(s_bot, sec_o_top[2]+canvas_o_height + 50)
+        if(s_bot >= sec_o_top[2] && s_top + sec4_c_box + 50 <= sec_o_bot[2]){
+            sec3_canvas.parentElement.style.opacity="1"
             sec3_scroll=s_top - sec_o_top[2]
             if(s_top + 50 >= sec_o_top[2]){
                 sec3_canvas.parentElement.style.top=(sec3_scroll + 50)+"px"
             }
-            sec3_canvas.parentElement.style.opacity="1"
         }
-        loop();
+        // (섹션3:영역)------------------------------------------------여기 고치던 중
+        else {
+            setTimeout(() => {
+                sec3_canvas.parentElement.style.opacity="0"
+            }, 500);
+        }
         // 섹션4, sec[3]
         sec4_heights=document.querySelectorAll(".sec4 > div")[0].clientHeight
         let sec4_point=(s_top - sec_o_top[3]).toFixed()
-        if(s_top >= sec_o_top[3] + 50 && s_bot < sec_o_bot[3] + 200){
+        // if(섹션4영역)
+        if(s_top >= sec_o_top[3] + 50 && s_bot < sec_o_bot[3] + (sec4_heights / 2.5)){
             sec[3].classList.add("on")
             sec[3].classList.remove("bot")
             //컬러박스 체크
@@ -206,14 +217,16 @@ document.addEventListener("DOMContentLoaded", function(){
                         color_placed=i;
                         for(let j=0; j<sec4_stone.length; j++){
                             if(i!==j){
-                                sec4_c_box[j].children[2].style.top="-500%" // .color_name
+                                sec4_c_box[j].children[2].style.top="-500%" // == .color_name
                                 setTimeout(() => {
                                     sec4_c_box[j].classList.remove("on")
                                 }, 500);
                             }
                         }
                         sec4_c_box[i].classList.add("on")
-                        sec4_c_box[i].children[2].style.top="160px"
+                        console.log(win_size)
+                        win_size>700?sec4_title_top=160:sec4_title_top=100
+                        sec4_c_box[i].children[2].style.top=sec4_title_top+"px"
                         // 컬러박스 바꿈
                         break;
                     }
@@ -356,4 +369,9 @@ document.addEventListener("DOMContentLoaded", function(){
         
     })
     // 스크롤이벤트 끝
+    window.addEventListener("resize", function(){
+        sec_o_top=sections_init("o_top");
+        sec_o_bot=sections_init("o_bot");
+        sec_chk_in=sections_init("chk_in");
+    });
 });
