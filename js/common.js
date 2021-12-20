@@ -33,3 +33,21 @@ function pos_y(el, updown, speed){
         }, speed);
     }
 };
+let pos_2d_chk=false;
+function pos_2d(el, direction, speed){
+    if(!pos_2d_chk){
+        let pos_direct;
+        direction=="right"||direction=="left"?pos_direct="translateX":pos_direct="translateY"
+        direction=="right"||direction=="up"?direction=1:direction=-1
+        let tmp_pos=100 * direction; // 100, -100
+        pos_2d_chk=true;
+        let pos_2d_interval=setInterval(() => {
+            tmp_pos+=(-1 * direction); // --, ++
+            el.style.transform = pos_direct+"("+tmp_pos+"%)"
+            if(Math.abs(tmp_pos) == 0){
+                clearInterval(pos_2d_interval)
+                pos_x_chk=false;
+            }
+        }, speed);
+    }
+};
