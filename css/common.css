@@ -77,8 +77,27 @@ a {
 .text_xs {
     font-size: 0.7em;
 }
+.text_box {
+    padding-left: 40px;
+    padding-right: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.text {
+    max-width: 800px;
+    width: 100%;
+}
+.text.center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 @media screen and (max-width: 1000px) {
     .contents_area {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .text_box {
         padding-left: 20px;
         padding-right: 20px;
     }

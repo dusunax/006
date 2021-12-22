@@ -94,17 +94,21 @@ document.addEventListener("DOMContentLoaded", function(){
     };
     // 섹션3, sec[2], canvas 캔버스
     let sec3_scroll;
+    let tmptmp_sec3;
     const sec3_canvas=document.querySelector("#sec3_canvas");
     const context = sec3_canvas.getContext('2d');
     const sec3_imgs = [];
     // 00000 000 console.log(canvas.getContext)
-    let canvas_o_height=sec3_canvas.clientHeight
     if(!sec3_canvas.getContext){
         console.log("캔버스 기능을 제공하지 않는 브라우저입니다.")
     }
+    let canvas_height=sec3_canvas.parentElement.clientHeight;
+    let canvas_offset=(win_h/2)-(canvas_height/2); //중간
     let sec3_image_count=717;
     let progress;
     let current_frame;
+    set_img();
+    loop();
     function set_img() {
         for(let i=0; i<sec3_image_count; i++) {
             let img_el = new Image();
@@ -117,24 +121,47 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
     function loop() {
-        progress = (s_top - sec_o_top[2]) / (sec[2].clientHeight - win_h + 500);
+        if(win_size > 1000){
+            progress = (s_top - sec_o_top[2]) / (sec[2].clientHeight + canvas_height - win_h - (win_h/2));
+        }
+        else {
+            progress = (s_top - sec_o_top[2]) / (sec[2].clientHeight + canvas_height - win_h);
+        }
         // console.log("s_top: "+s_top, "\no_top: "+Number(sec_o_top[2]), "\n0부터 785: "+(s_top - sec_o_top[2] + 50),"\n진행:"+ progress)
         if(progress < 0) progress = 0;
         else if(progress > 1) progress = 1;
         current_frame = Math.round((sec3_image_count - 1) * progress)
         context.drawImage(sec3_imgs[current_frame], 0, 0, 1200, 1200);
     }
-    set_img();
-    loop();
     // 네비 섹션이동
     let nav_li=document.querySelectorAll(".nav_section ul li");
+    let nav_title=document.querySelectorAll(".nav_title");
     for(let i=0; i<nav_li.length; i++){
+        nav_title[i].innerText=nav_li[i].children[1].innerText;
         nav_li[i].addEventListener('mouseenter', function(){
             nav_li[i].children[0].classList.toggle('active')
         })
         nav_li[i].addEventListener('mouseleave', function(){
             nav_li[i].children[0].classList.toggle('active')
         })
+        nav_li[i].addEventListener('click', function(){
+            event.preventDefault();
+            let tmp_y;
+            let tmp_el;
+            for(let j=0; j<nav_title.length; j++){
+                if(nav_title[j].innerText == nav_li[i].children[1].innerText){
+                    tmp_el=nav_title[j]
+                    while(!tmp_el.classList.contains("sec")){
+                        tmp_el=tmp_el.parentElement;
+                    }
+                    tmp_y=tmp_el.getBoundingClientRect().top + s_top;
+                    setTimeout(() => {
+                        document.querySelector('html').scrollTop = tmp_y - 50
+                    }, 200);
+                }
+            }
+        })
+        
     }
     // 섹션4, sec[3], positions, 섹션 파트 나눔
     let sec4_c_name=document.querySelectorAll(".sec4 .color_name")
@@ -150,19 +177,44 @@ document.addEventListener("DOMContentLoaded", function(){
         sec4_stone.push((win_h) * i)
     }
     let sec4_title_top;
+    sec4_title_init(0, win_size)
+    function sec4_title_init(index, window){
+        window>768?sec4_title_top=160:sec4_title_top=140
+        window<360?sec4_title_top=130:""
+        sec4_c_box[index].children[2].style.top=sec4_title_top+"px"
+    }
     // 섹션5, sec[4], 함수 만들기
     let sec5_chk_in=false;
     let sec5_el_move=document.querySelector(".sec5 .right img")
+    // 섹션6
+    let sec6_bot_img=document.querySelector(".sec6 .img_box .bot")
     // 섹션8, sec[7]
     let sec8_el=document.querySelector(".sec8 .img_box .flip")
     let sec8_el_2=document.querySelector(".sec8 .img_box .water")
     // 섹션9, sec[8]
     let sec9_el=document.querySelector(".sec9 .img_box")
+    let sec9_li=document.querySelectorAll(".sec9 li")
+    // 섹션10, sec[9]
+    let sec10_li=document.querySelectorAll(".sec10 li")
+    for(let i=0; i<sec10_li.length; i++){
+        sec10_li[i].addEventListener('mouseenter', function(){
+            sec10_li[i].children[1].children[0].classList.toggle('active')
+        })
+        sec10_li[i].addEventListener('mouseleave', function(){
+            sec10_li[i].children[1].children[0].classList.toggle('active')
+        })
+    }
     // 이벤트: 스크롤
     document.addEventListener('scroll', function(){
         win_h=window.innerHeight
         section_on();
-        // 공통
+        // 네비
+        if(s_top >= document.querySelector(".nav_section").offsetTop){
+            document.querySelector(".nav_section").classList.add("fixed")
+        }
+        else {
+            document.querySelector(".nav_section").classList.remove("fixed")
+        }
         // 섹션2
         for(let i=0; i<fr_row.length; i++){
             if(s_top > sec2_text_oTop[i] - (win_h / 2) && s_top < sec2_text_oTop[i] - (win_h / 2) + 500){
@@ -177,42 +229,43 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
             }
         }
-        // 섹션3
+        // 섹션3, sec[2]
+        // sec3_top_point=sec_o_top[2] - 50;
+        sec3_scroll=s_top - sec_o_top[2];
+        canvas_height=sec3_canvas.parentElement.clientHeight;
+        canvas_offset=(win_h/2)-(canvas_height/2); //(doc)50% - (el)50%: top
         loop();
-        if(s_top + 50 < sec_o_top[2]){
-            sec3_canvas.parentElement.style.top="50px"
-            sec4_c_box[0].classList.remove("on")
-        }
-        else if(s_bot > sec_o_bot[2] + 200){
-            sec4_c_box[0].classList.add("on") // 4
-        }
-        // (섹션3:영역)------------------------------------------------여기 고치던 중
-        sec4_top_point=canvas_o_height + 50
-        console.log(s_bot, sec_o_top[2]+canvas_o_height + 50)
-        if(s_bot >= sec_o_top[2] && s_top + sec4_c_box + 50 <= sec_o_bot[2]){
-            sec3_canvas.parentElement.style.opacity="1"
-            sec3_scroll=s_top - sec_o_top[2]
-            if(s_top + 50 >= sec_o_top[2]){
-                sec3_canvas.parentElement.style.top=(sec3_scroll + 50)+"px"
+        // (섹션3:on)
+        if(s_top + canvas_offset > sec_o_top[2] + 0 && s_bot < sec_o_bot[2] + canvas_offset){
+            sec[2].classList.add("on")
+            // (섹션3:fixed영역)
+            if(s_top + (win_h/2) - (canvas_height / 2) >= canvas_offset){
+                sec3_canvas.parentElement.classList.add("fixed")
+                sec3_canvas.parentElement.classList.remove("bot")
+            }
+            if(s_bot > sec_o_bot[2]){
+                sec4_title_init(0, win_size)
             }
         }
-        // (섹션3:영역)------------------------------------------------여기 고치던 중
-        else {
-            setTimeout(() => {
-                sec3_canvas.parentElement.style.opacity="0"
-            }, 500);
+        else{
+            if(sec[2].classList.contains("on")){
+                sec[2].classList.remove("on")
+                sec3_canvas.parentElement.classList.remove("fixed")
+                if(s_bot > sec_o_bot[2]){
+                    sec3_canvas.parentElement.classList.add("bot")
+                }
+            }
         }
         // 섹션4, sec[3]
         sec4_heights=document.querySelectorAll(".sec4 > div")[0].clientHeight
         let sec4_point=(s_top - sec_o_top[3]).toFixed()
         // if(섹션4영역)
-        if(s_top >= sec_o_top[3] + 50 && s_bot < sec_o_bot[3] + (sec4_heights / 2.5)){
+        if(s_top >= sec_o_top[3] - 50 && s_bot < sec_o_bot[3] + (sec4_heights / 2.5)){
             sec[3].classList.add("on")
             sec[3].classList.remove("bot")
             //컬러박스 체크
             for(let i=sec4_stone.length; i>=0; i--){
                 if(sec4_point > (sec4_heights * i) - 200){
-                    console.log(sec4_point, i)
                     if(color_placed!==i){
                         color_placed=i;
                         for(let j=0; j<sec4_stone.length; j++){
@@ -224,9 +277,7 @@ document.addEventListener("DOMContentLoaded", function(){
                             }
                         }
                         sec4_c_box[i].classList.add("on")
-                        console.log(win_size)
-                        win_size>700?sec4_title_top=160:sec4_title_top=100
-                        sec4_c_box[i].children[2].style.top=sec4_title_top+"px"
+                        sec4_title_init(i, win_size)
                         // 컬러박스 바꿈
                         break;
                     }
@@ -239,7 +290,6 @@ document.addEventListener("DOMContentLoaded", function(){
             color_placed=null
             if(s_bot >= sec_o_top[3] + ((sec4_heights * sec4_c_name.length)) + 200){
                 sec[3].classList.add("bot")
-                console.log("1")
                 color_placed=sec4_c_name.length-1
                 sec4_c_box[color_placed].classList.add("on")
             }
@@ -251,7 +301,6 @@ document.addEventListener("DOMContentLoaded", function(){
         if(sec[4].classList.contains("on")){
             if(!sec5_chk_in){
                 sec5_chk_in=true;
-                console.log(win_size)
                 if(win_size<=768){
                     sec5_el_move.style.transform="translateY(0)"
                     sec5_el_move.style.opacity="1"
@@ -269,8 +318,11 @@ document.addEventListener("DOMContentLoaded", function(){
                 sec5_chk_in=false;
             }
         }
-        // 섹션6, sec[5] // 함수정리...?
-        let sec6_point=(s_top - sec_o_top[5] + 200).toFixed()
+        // 섹션6, sec[5]
+        let sec6_point=(s_top - sec_o_top[5] + 0).toFixed()
+        if(sec6_point > 0 && sec6_point < 100){
+            sec6_bot_img.style.opacity="0.5"+((sec6_point / 200))
+        }
         if(sec[5].classList.contains("on")){
             if(!sec_chk_in[5]){
                 document.querySelector(".noclock").style.opacity="0"
@@ -282,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 }, 100);
                 setTimeout(() => {
                     document.querySelector(".sec6 .txt").classList.add("active")
-                }, 1300);
+                }, 800);
             }
         }
         else {
@@ -332,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function(){
         if(sec8_point > 0 && sec8_point < 500){
             sec8_el.style.transform="translateX(calc(-50%)) rotate("+(-25 - (sec8_point / 100))+"deg)"
             sec8_el_2.style.transform="translateY(-"+sec8_point/2+"px)"
-            sec8_el_2.style.opacity=0.5+(sec8_point / 1000);
+            sec8_el_2.style.opacity=(1-(sec8_point / 1000));
         }
         // 섹션9, sec[8], 갤럭시제품
         let sec9_point=(s_top - sec_o_top[8] + 200).toFixed()
@@ -352,7 +404,19 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
                 sec9_el.children[i].children[0].style.transform="rotate("+((sec9_point / 100))+"deg)"
                 document.querySelector(".sec9 .bg").style.opacity=0.5+(sec9_point / 1000);
-                console.log((sec9_point / 500))
+            }
+            for(let i=0; i<sec9_li.length; i++){
+                if(sec9_point>(120*(i))){
+                    sec9_li[i].classList.add("event")
+                }
+                else {
+                    sec9_li[i].classList.remove("event")
+                }
+            }
+        }
+        else {
+            for(let i=0; i<sec9_li.length; i++){
+                sec9_li[i].classList.remove("event")
             }
         }
         // 섹션10, sec[9]
@@ -364,14 +428,13 @@ document.addEventListener("DOMContentLoaded", function(){
                 sec_chk_in[9]=false;
             }
         }
-
-
-        
     })
     // 스크롤이벤트 끝
     window.addEventListener("resize", function(){
         sec_o_top=sections_init("o_top");
         sec_o_bot=sections_init("o_bot");
         sec_chk_in=sections_init("chk_in");
+        loop()
+        sec4_title_init(color_placed, win_size)
     });
 });

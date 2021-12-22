@@ -49,6 +49,7 @@
     position: absolute;
     margin-left: 50%;
     top: 60%;
+    left: auto;
     transform: translateY(-50%);
 
     font-family: var(--font-bold);
@@ -145,22 +146,25 @@ h1.title {
 .sec2 .text_box {
     flex: 1 1 auto;
     margin-left: 40px;
+    left: auto;
+    transform: none;
 }
 /* 섹션 nav */
 .nav_section {
     width: 100%;
+    height: 50px;
     text-align: center;
     margin: 70px 0;
 }
 .nav_section ul {
     display: inline-block;
     text-align: center;
-    transform: scale(1.3);
+    transform: scale(1.1);
 }
 .nav_section ul li{
     display: inline-block;
     border: 1px solid #ddd;
-    margin: 10px 8px;
+    margin: 6px 8px;
     position: relative;
     overflow: hidden;
 }
@@ -181,6 +185,22 @@ h1.title {
 }
 .nav_section .bg.active {
     left: 0;
+}
+.nav_section.fixed ul {
+    width: calc(100% - 150px);
+    height: 50px;
+    text-align: right;
+    position: fixed;
+    top: 0;
+    right: 20px;
+    z-index: 9999;
+    transform: scale(1);
+}
+.nav_section.fixed ul li {
+    margin: 0;
+    font-size: 11px;
+    padding: 5px 10px;
+    top: 11px;
 }
 /* 섹션3 */
 .sec3 {
@@ -203,9 +223,19 @@ h1.title {
 
     position: absolute;
     top: 0px;
-    left: 20%;
+    left: 50%;
+    transform: translateX(-55%);
     z-index: -9;
     transition: opacity .5s;
+}
+.sec3 .canvas_box.fixed {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%) translateX(-55%);
+}
+.sec3 .canvas_box.bot {
+    top: auto;
+    bottom: 5%;
 }
 .sec3 canvas{
     width: 100%;
@@ -249,6 +279,7 @@ h1.title {
 /* 섹션4 */
 .sec4 {
     z-index: 9;
+    overflow: hidden;
 }
 .sec4,
 .sec4 > div,
@@ -317,6 +348,7 @@ h1.title {
     top: 60vh;
     bottom: 0;
     background: #fff;
+    transform: translateY(1px);
 }
 .cream .img_bg {
     background: linear-gradient(to bottom left, #f2edcc, #fbefa1)
@@ -377,7 +409,7 @@ h1.title {
 /* 섹션5 */
 .sec5 {
     padding-top: 20vh;
-    padding-bottom: 20vh;
+    padding-bottom: 10vh;
 }
 .sec5 .contents_area {
     padding: 0;
@@ -409,6 +441,7 @@ h1.title {
     padding-right: 20%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 .sec5 .text_box {
     padding-top: 10px;
@@ -426,6 +459,7 @@ h1.title {
     text-align: right;
 }
 .sec5 .right img {
+    width: 99%;
     transform: translateY(100%);
     transition: opacity .4s;
     opacity: 0;
@@ -439,7 +473,7 @@ h1.title {
     width: 100%;
     height: 100%;
     padding-top: 15vh;
-    padding-bottom: 15vh;
+    padding-bottom: 20vh;
     position: relative;
     overflow: hidden;
 }
@@ -468,7 +502,7 @@ h1.title {
     height: auto;
     max-width: 1200px;
     bottom: 100px;
-    opacity: .2;
+    opacity: .8;
     transition-delay: .2s;
     transition: all .2s;
 }
@@ -478,11 +512,11 @@ h1.title {
 /* 배경박스 */
 .sec6 .bg_box {
     width: 100%;
-    height: 130%;
+    height: calc(100% + 80px);
     background: #000;
 
     position: absolute;
-    top: 0;
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
     transition: all .5s;
@@ -515,15 +549,16 @@ h1.title {
 }
 .sec6 .txt {
     opacity: 0;
-    transform: all .4s;
+    transition: opacity .2s;
     transform: translateY(-50%) translateX(-30px);
+    animation: flash .5s 2;
 }
 /* active */
 .sec6.active .bg_box {
     width: 267px;
     height: 140px;
     border-radius: 20px;
-    top: 39.2%;
+    top: 333px;
     left: 48.5%;
     transform: translateX(-50%);
     overflow: hidden;
@@ -541,6 +576,9 @@ h1.title {
     transform: translateY(-50%) translateX(30px);
     opacity: 1;
 }
+.sec6 .nav_title {
+    text-align: center;
+}
 /* bot */
 .sec6.bot .bg_box {
     opacity: 0;
@@ -553,11 +591,18 @@ h1.title {
 .sec7 {
     width: 100%;
     height: calc(100vh - 50px);
-    margin-top: 15vh;
-    margin-bottom: 15vh;
+    padding-top: 10vh;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     position: relative;
     overflow: hidden;
     background: linear-gradient(transparent, rgba(222, 222, 222, .3));
+}
+.sec7 .text_box h3 {
+    margin: 0;
+}
+.sec7 .text_box{
+    margin: 0;
 }
 .sec7 .bg {
     width: 50%;
@@ -572,12 +617,8 @@ h1.title {
     animation-delay: 2.5s;
     animation: flash .5s 2;
 }
-.sec7 .text_box {
-    padding-left: 100px;
-}
 .sec7 ul {
     margin-top: 75px;
-    padding-left: 105px;
     display: flex;
 }
 .sec7 li {
@@ -591,10 +632,9 @@ h1.title {
     margin-bottom: 30px;
 }
 /* 섹션8 */
-.sec8,
-.sec9 {
+.sec8 {
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(80vh - 50px);
     position: relative;
 }
 .sec8 .img_box {
@@ -611,13 +651,18 @@ h1.title {
     text-align: right;
     position: relative;
 }
+.sec8 .text_box > * {
+    margin-left: auto;
+    text-align: right;
+}
 .sec8 .img_box img{
     position: absolute;
     top: 0;
 }
 .sec8 .img_box .water {
-    height: 100%;
-    top: 10%;
+    max-width: 70%;
+    height: auto;
+    top: 0%;
 }
 .sec8 .img_box .flip {
     width: 50%;
@@ -628,7 +673,10 @@ h1.title {
 }
 /* 섹션9 */
 .sec9 {
-    margin-top: 100px;
+    width: 100%;
+    height: calc(100vh - 50px);
+    position: relative;
+    margin-top: 500px;
     margin-bottom: 200px;
 }
 .sec9 .bg,
@@ -640,6 +688,40 @@ h1.title {
 .sec9 .img_box {
     width: 100%;
 }
+.sec9 .dot {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translateY(-50%);
+
+    transition: all .3s;
+    overflow: hidden;
+}
+.sec9 li:hover .dot,
+.sec9 li.event .dot {
+    width: auto;
+    height: auto;
+}
+.sec9 span {
+    font-size: 13px;
+    width: 15px;
+    padding: 2px 6px;
+    display: block;
+    white-space: nowrap;
+    transition: width .3s, opacity .2s;
+    opacity: 0;
+}
+.sec9 li:hover span,
+.sec9 li.event span {
+    width: 120px;
+    opacity: 1;
+}
 .sec9 .bg {
     left: 50%;
     transform: translateX(-50%);
@@ -650,25 +732,25 @@ h1.title {
     display: block;
 }
 .sec9 .img_box li{
-    width: 20%;
+    width: 15%;
     position: absolute;
 }
 .sec9 .img_box li.flip {
-    width: 18%;
+    width: 13%;
     top: -10%;
-    right: 25%;
+    right: 30%;
 }
 .sec9 .img_box li.fold {
     top: 0%;
-    left: 25%;
+    left: 30%;
 }
 .sec9 .img_box li.buzz {
-    width: 10%;
+    width: 9%;
     bottom: 20%;
     right: 33%;
 }
 .sec9 .img_box li.watch {
-    width: 15%;
+    width: 12%;
     bottom: 0%;
     left: 30%;
 }
@@ -685,6 +767,9 @@ h1.title {
     padding-top: 50px;
     padding-bottom: 50px;
 }
+.sec10 .nav_title {
+    text-indent: -9999px;
+}
 .sec10 .banner_ul {
     max-width: 1800px;
     width: 100%;
@@ -696,8 +781,13 @@ h1.title {
     flex: 1 1 25%;
     padding-bottom: 30%;
     border-radius: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
+    box-shadow: 2px 2px 10px 0 #ddd;
+
     text-align: center;
-    background: pink;
+    position: relative;
+    background: #606060;
 }
 .sec10 li:nth-child(1){
     background: url(../img/section/10-banner0.webp) no-repeat 70% / cover;
@@ -710,6 +800,48 @@ h1.title {
 }
 .sec10 li:nth-child(4){
     background: url(../img/section/10-banner3.webp) no-repeat 60% / cover;
+}
+.sec10 .btn_more {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: rgba(55, 55, 55, .2);
+
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: -.02em;
+
+    overflow: hidden;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 99;
+}
+.sec10 h2 {
+    padding-top: 50px;
+    word-break: keep-all;
+}
+.sec10 a {
+    pointer-events: none;
+    position: relative;
+}
+.sec10 .btn_more .bg{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: -9;
+    transition: all .5s;
+    background: #222;
+}
+.sec10 .btn_more:hover {
+    transition: all .2s;
+    background: none;
+}
+.sec10 .btn_more .bg.active {
+    left: 0;
 }
 /* 반응형시작 */
 @media screen and (max-width: 1800px) {
@@ -736,6 +868,9 @@ h1.title {
         color: #000;
         text-shadow: 1px 1px 10px #fff;
     }
+    .sec3 .canvas_box {
+        width: 60%;
+    }
     .sec6.active .bg_box {
         left: 48.3%;
     }
@@ -755,6 +890,9 @@ h1.title {
         padding-right: 0px;
         box-shadow: var(--boxshadow-topborder);
     }
+    .sec3 .canvas_box {
+        width: 65%;
+    }
     .sec4 img {
         width: 55%;
         transform: translateX(-44%) translateY(-55%);
@@ -772,6 +910,9 @@ h1.title {
     }
     .sec6.active .bg_box {
         left: 47.5%;
+    }
+    .sec9 {
+        margin-top: 20vw;
     }
     .sec10 .banner_ul {
         flex-wrap: wrap;
@@ -803,12 +944,18 @@ h1.title {
     .nav_section {
         margin: 30px 0;
     }
+    .sec3 .canvas_box {
+        width: 70%;
+    }
     .sec5 .contents_area > * {
         height: auto;
     }
     .sec5 .right {
         padding-left: 30px;
         padding-right: 20px;
+    }
+    .sec6 {
+        padding-bottom: 30vh;
     }
     .sec6 .text_box {
         padding-left: 150px;
@@ -817,10 +964,33 @@ h1.title {
     .sec6.active .bg_box {
         left: 47.0%;
     }
+    .sec7 {
+        margin-top: 10vh;
+        height: 55vh;
+    }
 }
 @media screen and (max-width: 1000px) {
     .sec2 .title_box_fr {
         margin-left: 20px;
+    }
+    .sec3 .canvas_box {
+        width: 80%;
+    }
+    .sec7 .bg {
+        opacity: .8;
+    }
+    .sec9 {
+        margin-top: 100px;
+    }
+    .sec9 .dot {
+        top: 100%;
+        left: 20%;
+    }
+    .sec9 span {
+        font-size: 10px;
+    }
+    .sec9 li.event span {
+        width: 90px;
     }
 }
 @media screen and (max-width: 960px) {
@@ -840,13 +1010,13 @@ h1.title {
         font-size: 90px;
     }
     .nav_section ul {
-        transform: scale(1.1);
+        transform: scale(1.0);
     }
     .sec4.bot img {
         transform: translateX(-44%) translateY(-60%);
     }
     .sec5 {
-        padding-top: 200px;
+        padding-top: 100px;
     }
     .sec5 .contents_area {
         display: block;
@@ -898,34 +1068,59 @@ h1.title {
     .sec4 .text_box > *, .sec4 .color_name {
         width: 80%;
     }
+    .sec9 .img_box li {
+        transform: scale(1.5);
+    }
+    .sec9 .img_box li.flip {
+        right: 20%;
+    }
+    .sec9 .img_box li.fold {
+        left: 20%;
+    }
+    .sec9 .img_box li.buzz {
+        right: 25%;
+    }
+    .sec9 .img_box li.watch {
+        left: 15%;
+    }
 }
 @media screen and (max-width: 768px) {
-    .sec4 img {
-        width: 65%;
-    }
     .text_box .title, h1.title {
         font-size: 2em;
     }
-    .sec6.active .bg_box {
-        left: 46.0%;
-    }
     .sec4 .nav_title {
         opacity: 0;
+        text-indent: -999px;
     }
     .sec4 .title {
-        top: 15px;
+        top: 40px;
+    }
+    .sec4 .text_box {
+        height: calc(97%);
+    }
+    .sec4 img {
+        width: 65%;
     }
     .sec4 .color_name {
-        top: 100px
-    }
-    .sec4.on .text {
-        bottom: 80px;
+        top: 120px
     }
     .sec4 img {
         top: 65%;
     }
     .sec4.on img {
-        top: 55%;
+        top: 56%;
+    }
+    .sec4.on .text {
+        bottom: 80px;
+    }
+    .sec4.bot .text {
+        bottom: 140px;
+    }
+    .sec6.active .bg_box {
+        left: 46.0%;
+    }
+    .sec9 {
+        margin-top: 0px;
     }
 }
 @media screen and (max-width: 700px) {
@@ -939,7 +1134,7 @@ h1.title {
         transform: none;
     }
     .sec6 .text_box {
-        padding: 20px 50px;
+        padding: 0px 50px;
     }
 }
 @media screen and (max-width: 568px) {
@@ -962,6 +1157,13 @@ h1.title {
     }
     .sec4 h3.title {
         font-size: 1.5em;
+    }
+    .sec5 {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .sec5 .nav_title {
+        padding-top: 0;
     }
 }
 @media screen and (max-width: 500px) {
@@ -1004,6 +1206,14 @@ h1.title {
     .sec3 .text_box > * {
         width: 35px;
     }
+    .sec9 span {
+        font-size: 10px;
+        white-space: normal;
+        word-break: keep-all;     
+    }
+    .sec9 li.event span {
+        width: 50px;
+    }
 }
 @media screen and (max-width: 470px) {
     .text_box {
@@ -1023,6 +1233,11 @@ h1.title {
     }
     .sec6.active .bg_box {
         left: 42.0%;
+    }
+}
+@media screen and (max-width: 420px) {
+    .sec4 .color_name {
+        top: 100px
     }
 }
 @media screen and (max-width: 360px) {

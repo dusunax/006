@@ -16,4 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
             header.classList.remove('float')
         }
     })
+    document.querySelector(".h_bot .head").addEventListener("click", function(){
+        document.querySelector('html').scrollTop = 0;
+    })
 });
