@@ -91,8 +91,6 @@ document.addEventListener("DOMContentLoaded", function(){
         }, 5);
     };
     // 섹션3, sec[2], canvas 캔버스
-    let sec3_scroll;
-    let tmptmp_sec3;
     const sec3_canvas=document.querySelector("#sec3_canvas");
     const context = sec3_canvas.getContext('2d');
     const sec3_imgs = [];
@@ -170,15 +168,15 @@ document.addEventListener("DOMContentLoaded", function(){
     sec4_c_name[0].style.opacity="1";
     sec4_img[0].style.opacity="1";
     let sec4_stone=[];
-    let color_placed=null;
+    let color_placed=0;
     for(let i=0; i<sec4_c_name.length; i++){
         sec4_stone.push((win_h) * i);
     }
     let sec4_title_top;
     sec4_title_init(0, win_size);
     function sec4_title_init(index, window){
-        window>768?sec4_title_top=160:sec4_title_top=140;
-        window<360?sec4_title_top=130:"";
+        window>768?sec4_title_top=160:sec4_title_top=140
+        window<360?sec4_title_top=130:""
         sec4_c_box[index].children[2].style.top=sec4_title_top+"px";
     }
     // 섹션5, sec[4], 함수 만들기
@@ -306,10 +304,10 @@ document.addEventListener("DOMContentLoaded", function(){
                     sec5_el_move.style.opacity="1";
                 }
                 else if(win_size<=960){
-                    pos_2d(sec5_el_move, "down", 2);
+                    pos_2d(sec5_el_move, "down", 1);
                 }
                 else {
-                    pos_2d(sec5_el_move, "up", 1);
+                    pos_2d(sec5_el_move, "up", 0.5);
                 }
             }
         }
@@ -334,14 +332,14 @@ document.addEventListener("DOMContentLoaded", function(){
                 }, 100);
                 setTimeout(() => {
                     document.querySelector(".sec6 .txt").classList.add("active");
-                }, 800);
+                }, 200);
             }
         }
         else {
             if(sec_chk_in[5]){
                 setTimeout(() => {
                     sec[5].classList.remove("active");
-                }, 200);
+                }, 100);
                 document.querySelector(".sec6 .txt").classList.remove("active");
                 if(s_bot > sec_o_bot[5] - (win_h/5)){
                     sec[5].classList.add("bot");
@@ -361,7 +359,9 @@ document.addEventListener("DOMContentLoaded", function(){
         if(sec[6].classList.contains("on")){
             if(!sec_chk_in[6]){
                 sec_chk_in[6]=true;
-                pos_2d(document.querySelector(".sec7 .bg"), "up", .5);
+                if(win_size>768){
+                    pos_2d(document.querySelector(".sec7 .bg"), "up", .5);
+                }
                 sec[6].classList.add("active");
             }
         }
@@ -435,6 +435,5 @@ document.addEventListener("DOMContentLoaded", function(){
         sec_o_bot=sections_init("o_bot");
         sec_chk_in=sections_init("chk_in");
         loop();
-        sec4_title_init(color_placed, win_size);
     });
 });
