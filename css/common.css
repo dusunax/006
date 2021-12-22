@@ -71,8 +71,33 @@ a {
 .wrap .show_lg {
     display: none;
 }
+.title_hidden {
+    display: none;
+}
+.text_xs {
+    font-size: 0.7em;
+}
+.text_box {
+    padding-left: 40px;
+    padding-right: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.text {
+    max-width: 800px;
+    width: 100%;
+}
+.text.center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 @media screen and (max-width: 1000px) {
     .contents_area {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .text_box {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -95,5 +120,13 @@ a {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+@keyframes flash {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .2;
     }
 }
