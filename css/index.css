@@ -187,14 +187,18 @@ h1.title {
     left: 0;
 }
 .nav_section.fixed ul {
-    width: calc(100% - 150px);
+    width: 100%;
+    max-width: 1440px;
     height: 50px;
+    padding-right: 10px;
+    box-sizing: border-box;
     text-align: right;
+
     position: fixed;
     top: 0;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
     z-index: 9999;
-    transform: scale(1);
 }
 .nav_section.fixed ul li {
     margin: 0;
@@ -1088,6 +1092,12 @@ h1.title {
     .text_box .title, h1.title {
         font-size: 2em;
     }
+    .nav_section.fixed ul li {
+        margin: 0;
+        font-size: 10px;
+        padding: 2px 5px;
+        top: 15px;
+    }
     .sec4 .nav_title {
         opacity: 0;
         text-indent: -999px;
@@ -1164,6 +1174,17 @@ h1.title {
     }
     .sec5 .nav_title {
         padding-top: 0;
+    }
+    .sec10 .banner_ul li {
+        padding-bottom: 10%;
+        border-radius: 12px;
+    }
+    .sec10 h2 {
+        padding-top: 20px;
+    }
+    .sec10 .btn_more {
+        left: 15px;
+        bottom: 10px;
     }
 }
 @media screen and (max-width: 500px) {
