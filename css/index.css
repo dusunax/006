@@ -218,7 +218,7 @@ h1.title {
     pointer-events: none;
 }
 .sec3 .canvas_box {
-    width: 55%;
+    width: 54%;
     font-size: 0;
 
     position: absolute;
@@ -231,7 +231,7 @@ h1.title {
 .sec3 .canvas_box.fixed {
     position: fixed;
     top: 50%;
-    transform: translateY(-50%) translateX(-55%);
+    transform: translateY(-50%) translateX(-55%) scale(1.05);
 }
 .sec3 .canvas_box.bot {
     top: auto;

@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function(){
     let sec_o_bot=sections_init("o_bot");
     let s_limit_boundery=100
     let sec_chk_in=sections_init("chk_in");
-    // let sections_limit=sections_init("s_limit"); 보류
     function sections_init(getThis){
         let result=[];
         for(let i=0; i<sec.length; i++){
@@ -54,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
     };
-    // 확인용: console.log(sec_o_top, sec_o_bot)
     // 섹션1, sec[0], video(재생종료 후 fadeOut)
     let sec1_video=document.querySelector(".sec1_video")
     document.querySelector(".sec1").style.opacity="1";
@@ -215,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function(){
         else {
             document.querySelector(".nav_section").classList.remove("fixed")
         }
-        // 섹션2
+        // 섹션2, sec[1]
         for(let i=0; i<fr_row.length; i++){
             if(s_top > sec2_text_oTop[i] - (win_h / 2) && s_top < sec2_text_oTop[i] - (win_h / 2) + 500){
                 if(sec2_w_x[i]<100 && interv_chk==false){
@@ -230,16 +228,13 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         // 섹션3, sec[2]
-        // sec3_top_point=sec_o_top[2] - 50;
         sec3_scroll=s_top - sec_o_top[2];
         canvas_height=sec3_canvas.parentElement.clientHeight;
         canvas_offset=(win_h/2)-(canvas_height/2); //(doc)50% - (el)50%: top
         loop();
-        // (섹션3:on)
         if(s_top + canvas_offset > sec_o_top[2] + 0 && s_bot < sec_o_bot[2] + canvas_offset){
             sec[2].classList.add("on")
-            // (섹션3:fixed영역)
-            if(s_top + (win_h/2) - (canvas_height / 2) >= canvas_offset){
+            if(s_top + (win_h/2) - (canvas_height / 2) > canvas_offset){
                 sec3_canvas.parentElement.classList.add("fixed")
                 sec3_canvas.parentElement.classList.remove("bot")
             }
@@ -250,7 +245,9 @@ document.addEventListener("DOMContentLoaded", function(){
         else{
             if(sec[2].classList.contains("on")){
                 sec[2].classList.remove("on")
-                sec3_canvas.parentElement.classList.remove("fixed")
+                setTimeout(() => {
+                    sec3_canvas.parentElement.classList.remove("fixed")
+                }, 50);
                 if(s_bot > sec_o_bot[2]){
                     sec3_canvas.parentElement.classList.add("bot")
                 }
@@ -259,7 +256,6 @@ document.addEventListener("DOMContentLoaded", function(){
         // 섹션4, sec[3]
         sec4_heights=document.querySelectorAll(".sec4 > div")[0].clientHeight
         let sec4_point=(s_top - sec_o_top[3]).toFixed()
-        // if(섹션4영역)
         if(s_top >= sec_o_top[3] - 50 && s_bot < sec_o_bot[3] + (sec4_heights / 2.5)){
             sec[3].classList.add("on")
             sec[3].classList.remove("bot")
@@ -278,7 +274,6 @@ document.addEventListener("DOMContentLoaded", function(){
                         }
                         sec4_c_box[i].classList.add("on")
                         sec4_title_init(i, win_size)
-                        // 컬러박스 바꿈
                         break;
                     }
                     break;
@@ -306,10 +301,10 @@ document.addEventListener("DOMContentLoaded", function(){
                     sec5_el_move.style.opacity="1"
                 }
                 else if(win_size<=960){
-                    pos_y(sec5_el_move, "down", 2)
+                    pos_2d(sec5_el_move, "down", 2)
                 }
                 else {
-                    pos_y(sec5_el_move, "up", 1)
+                    pos_2d(sec5_el_move, "up", 1)
                 }
             }
         }
@@ -361,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function(){
         if(sec[6].classList.contains("on")){
             if(!sec_chk_in[6]){
                 sec_chk_in[6]=true;
-                pos_y(document.querySelector(".sec7 .bg"), "up", .5)
+                pos_2d(document.querySelector(".sec7 .bg"), "up", .5)
                 sec[6].classList.add("active")
             }
         }
@@ -429,7 +424,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
     })
-    // 스크롤이벤트 끝
+    // 이벤트: 리사이즈
     window.addEventListener("resize", function(){
         sec_o_top=sections_init("o_top");
         sec_o_bot=sections_init("o_bot");
